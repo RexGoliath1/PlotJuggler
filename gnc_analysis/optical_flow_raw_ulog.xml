@@ -1,0 +1,756 @@
+<?xml version="1.0" ?>
+<root>
+  <Plugins/>
+  <customMathEquations>
+    <snippet name="derived/reject_when_test_ratio_gt_1" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return 1.0</function>
+      <linked_source>estimator_aid_src_optical_flow/test_ratio.00</linked_source>
+    </snippet>
+    <snippet name="derived/of_gate_sd" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return v1</function>
+      <linked_source>estimator_aid_src_optical_flow/test_ratio.00</linked_source>
+      <additional_sources>
+        <v1>_parameters/EKF2_OF_GATE</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_gate_sq" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return v1 * v1</function>
+      <linked_source>estimator_aid_src_optical_flow/test_ratio.00</linked_source>
+      <additional_sources>
+        <v1>_parameters/EKF2_OF_GATE</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_gate_sq_x2" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return 2.0 * v1 * v1</function>
+      <linked_source>estimator_aid_src_optical_flow/test_ratio.00</linked_source>
+      <additional_sources>
+        <v1>_parameters/EKF2_OF_GATE</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_nis_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or v1 &lt;= 0 then return nan end
+return value * value / v1</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation.00</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/innovation_variance.00</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_nis_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or v1 &lt;= 0 then return nan end
+return value * value / v1</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation.01</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/innovation_variance.01</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_pred_flow_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value + v1</function>
+      <linked_source>estimator_aid_src_optical_flow/observation.00</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/innovation.00</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_pred_flow_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value + v1</function>
+      <linked_source>estimator_aid_src_optical_flow/observation.01</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/innovation.01</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_state_var_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value - v1</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation_variance.00</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/observation_variance.00</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_state_var_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value - v1</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation_variance.01</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/observation_variance.01</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_raw_flow_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or v1 &lt;= 0 then return nan end
+return -value / (v1 * 1.0e-6)</function>
+      <linked_source>vehicle_optical_flow/pixel_flow.00</linked_source>
+      <additional_sources>
+        <v1>vehicle_optical_flow/integration_timespan_us</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_raw_flow_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or v1 &lt;= 0 then return nan end
+return -value / (v1 * 1.0e-6)</function>
+      <linked_source>vehicle_optical_flow/pixel_flow.01</linked_source>
+      <additional_sources>
+        <v1>vehicle_optical_flow/integration_timespan_us</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_body_rate_correction_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value - v1</function>
+      <linked_source>derived/of_raw_flow_x</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/observation.00</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_body_rate_correction_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return value - v1</function>
+      <linked_source>derived/of_raw_flow_y</linked_source>
+      <additional_sources>
+        <v1>estimator_aid_src_optical_flow/observation.01</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_log_obs_var_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>estimator_aid_src_optical_flow/observation_variance.00</linked_source>
+    </snippet>
+    <snippet name="derived/of_log_obs_var_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>estimator_aid_src_optical_flow/observation_variance.01</linked_source>
+    </snippet>
+    <snippet name="derived/of_log_state_var_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>derived/of_state_var_x</linked_source>
+    </snippet>
+    <snippet name="derived/of_log_state_var_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>derived/of_state_var_y</linked_source>
+    </snippet>
+    <snippet name="derived/of_log_innov_var_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation_variance.00</linked_source>
+    </snippet>
+    <snippet name="derived/of_log_innov_var_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or value &lt;= 0 then return nan end
+return math.log(value) / math.log(10)</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation_variance.01</linked_source>
+    </snippet>
+    <snippet name="derived/of_rejected" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) then return nan end
+return value</function>
+      <linked_source>estimator_aid_src_optical_flow/innovation_rejected</linked_source>
+    </snippet>
+    <snippet name="derived/of_fused" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) then return nan end
+return value</function>
+      <linked_source>estimator_aid_src_optical_flow/fused</linked_source>
+    </snippet>
+    <snippet name="derived/vehicle_speed_xy_m_s" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return math.sqrt(value * value + v1 * v1)</function>
+      <linked_source>vehicle_local_position/vx</linked_source>
+      <additional_sources>
+        <v1>vehicle_local_position/vy</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/of_vel_body_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return value</function>
+      <linked_source>estimator_optical_flow_vel/vel_body.00</linked_source>
+    </snippet>
+    <snippet name="derived/of_vel_body_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return value</function>
+      <linked_source>estimator_optical_flow_vel/vel_body.01</linked_source>
+    </snippet>
+    <snippet name="derived/of_vel_ne_x" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return value</function>
+      <linked_source>estimator_optical_flow_vel/vel_ne.00</linked_source>
+    </snippet>
+    <snippet name="derived/of_vel_ne_y" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return value</function>
+      <linked_source>estimator_optical_flow_vel/vel_ne.01</linked_source>
+    </snippet>
+    <snippet name="derived/sens_flow_minhgt" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return v1</function>
+      <linked_source>vehicle_optical_flow/distance_m</linked_source>
+      <additional_sources>
+        <v1>_parameters/SENS_FLOW_MINHGT</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/sens_flow_maxhgt" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return v1</function>
+      <linked_source>vehicle_optical_flow/distance_m</linked_source>
+      <additional_sources>
+        <v1>_parameters/SENS_FLOW_MAXHGT</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/ekf2_of_qmin" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(v1) then return nan end
+return v1</function>
+      <linked_source>vehicle_optical_flow/quality</linked_source>
+      <additional_sources>
+        <v1>_parameters/EKF2_OF_QMIN</v1>
+      </additional_sources>
+    </snippet>
+  </customMathEquations>
+  <tabbed_widget name="Main Window" parent="main_window">
+    <Tab containers="1" tab_name="OF prediction axis 0">
+      <Container>
+        <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+          <DockSplitter orientation="-" count="4" sizes="0.25;0.25;0.25;0.25">
+          <DockArea name="flow 0 observed / predicted">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="estimator_aid_src_optical_flow/observation.00" color="#1f77b4"/>
+              <curve name="derived/of_pred_flow_x" color="#d62728"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 0 body-rate correction">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_raw_flow_x" color="#7f7f7f"/>
+              <curve name="derived/of_body_rate_correction_x" color="#9467bd"/>
+              <curve name="estimator_aid_src_optical_flow/observation.00" color="#1f77b4"/>
+              <curve name="estimator_optical_flow_vel/gyro_rate.00" color="#bcbd22"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 0 predicted - observed">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="estimator_aid_src_optical_flow/innovation.00" color="#d62728"/>
+              <curve name="estimator_aid_src_optical_flow/innovation_filtered.00" color="#9467bd"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 0 log10 variance">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_log_obs_var_x" color="#1f77b4"/>
+              <curve name="derived/of_log_state_var_x" color="#9467bd"/>
+              <curve name="derived/of_log_innov_var_x" color="#d62728"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="flow 0 normalized innovation">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="0.000000" top="18.000000" left="0.000000" right="100.000000"/>
+              <limitY min="0" max="18"/>
+              <curve name="derived/of_nis_x" color="#d62728"/>
+              <curve name="derived/of_gate_sq" color="#bcbd22"/>
+              <curve name="derived/of_gate_sq_x2" color="#111111"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 0 rejection flags">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/reject_optflow_x" color="#d62728"/>
+              <curve name="derived/of_rejected" color="#ff7f0e"/>
+              <curve name="derived/of_fused" color="#2ca02c"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 0 test ratio">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="0.000000" top="2.000000" left="0.000000" right="100.000000"/>
+              <limitY min="0" max="2"/>
+              <curve name="estimator_aid_src_optical_flow/test_ratio.00" color="#d62728"/>
+              <curve name="estimator_aid_src_optical_flow/test_ratio_filtered.00" color="#9467bd"/>
+              <curve name="derived/reject_when_test_ratio_gt_1" color="#111111"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <Tab containers="1" tab_name="OF prediction axis 1">
+      <Container>
+        <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+          <DockSplitter orientation="-" count="4" sizes="0.25;0.25;0.25;0.25">
+          <DockArea name="flow 1 observed / predicted">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="estimator_aid_src_optical_flow/observation.01" color="#2ca02c"/>
+              <curve name="derived/of_pred_flow_y" color="#d62728"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 1 body-rate correction">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_raw_flow_y" color="#7f7f7f"/>
+              <curve name="derived/of_body_rate_correction_y" color="#9467bd"/>
+              <curve name="estimator_aid_src_optical_flow/observation.01" color="#2ca02c"/>
+              <curve name="estimator_optical_flow_vel/gyro_rate.01" color="#bcbd22"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 1 predicted - observed">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="estimator_aid_src_optical_flow/innovation.01" color="#ff7f0e"/>
+              <curve name="estimator_aid_src_optical_flow/innovation_filtered.01" color="#8c564b"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 1 log10 variance">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_log_obs_var_y" color="#2ca02c"/>
+              <curve name="derived/of_log_state_var_y" color="#9467bd"/>
+              <curve name="derived/of_log_innov_var_y" color="#ff7f0e"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="flow 1 normalized innovation">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="0.000000" top="18.000000" left="0.000000" right="100.000000"/>
+              <limitY min="0" max="18"/>
+              <curve name="derived/of_nis_y" color="#ff7f0e"/>
+              <curve name="derived/of_gate_sq" color="#bcbd22"/>
+              <curve name="derived/of_gate_sq_x2" color="#111111"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 1 rejection flags">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/reject_optflow_y" color="#d62728"/>
+              <curve name="derived/of_rejected" color="#ff7f0e"/>
+              <curve name="derived/of_fused" color="#2ca02c"/>
+            </plot>
+          </DockArea>
+          <DockArea name="flow 1 test ratio">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="0.000000" top="2.000000" left="0.000000" right="100.000000"/>
+              <limitY min="0" max="2"/>
+              <curve name="estimator_aid_src_optical_flow/test_ratio.01" color="#ff7f0e"/>
+              <curve name="estimator_aid_src_optical_flow/test_ratio_filtered.01" color="#8c564b"/>
+              <curve name="derived/reject_when_test_ratio_gt_1" color="#111111"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <Tab containers="1" tab_name="OF context">
+      <Container>
+        <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="height / range">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="vehicle_optical_flow/distance_m" color="#1f77b4"/>
+              <curve name="distance_sensor/current_distance" color="#2ca02c"/>
+              <curve name="vehicle_local_position/dist_bottom" color="#9467bd"/>
+              <curve name="vehicle_optical_flow/min_ground_distance" color="#7f7f7f"/>
+              <curve name="derived/sens_flow_minhgt" color="#111111"/>
+            </plot>
+          </DockArea>
+          <DockArea name="quality">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="vehicle_optical_flow/quality" color="#1f77b4"/>
+              <curve name="derived/ekf2_of_qmin" color="#d62728"/>
+            </plot>
+          </DockArea>
+          <DockArea name="vehicle position">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="vehicle_local_position/x" color="#1f77b4"/>
+              <curve name="vehicle_local_position/y" color="#2ca02c"/>
+              <curve name="vehicle_local_position/z" color="#d62728"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="vehicle velocity">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="vehicle_local_position/vx" color="#1f77b4"/>
+              <curve name="vehicle_local_position/vy" color="#2ca02c"/>
+              <curve name="vehicle_local_position/vz" color="#d62728"/>
+              <curve name="derived/vehicle_speed_xy_m_s" color="#ff7f0e"/>
+            </plot>
+          </DockArea>
+          <DockArea name="optical flow velocity body">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_vel_body_x" color="#9467bd"/>
+              <curve name="derived/of_vel_body_y" color="#8c564b"/>
+            </plot>
+          </DockArea>
+          <DockArea name="optical flow velocity NE">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/of_vel_ne_x" color="#17becf"/>
+              <curve name="derived/of_vel_ne_y" color="#e377c2"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <Tab containers="1" tab_name="OF status CS">
+      <Container>
+        <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+          <DockSplitter orientation="-" count="4" sizes="0.25;0.25;0.25;0.25">
+          <DockArea name="cs_opt_flow">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/cs_opt_flow" color="#2ca02c"/>
+            </plot>
+          </DockArea>
+          <DockArea name="cs_opt_flow_terrain">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/cs_opt_flow_terrain" color="#17becf"/>
+            </plot>
+          </DockArea>
+          <DockArea name="cs_rng_hgt">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/cs_rng_hgt" color="#1f77b4"/>
+            </plot>
+          </DockArea>
+          <DockArea name="cs_rng_terrain">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/cs_rng_terrain" color="#9467bd"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="cs_rng_fault">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="estimator_status_flags/cs_rng_fault" color="#d62728"/>
+            </plot>
+          </DockArea>
+          <DockArea name="landed">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="vehicle_land_detected/landed" color="#111111"/>
+            </plot>
+          </DockArea>
+          <DockArea name="in_ground_effect">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-0.100000" top="1.100000" left="0.000000" right="100.000000"/>
+              <limitY min="-0.1" max="1.1"/>
+              <curve name="vehicle_land_detected/in_ground_effect" color="#ff7f0e"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <Tab containers="1" tab_name="OF params EKF">
+      <Container>
+        <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+          <DockSplitter orientation="-" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="EKF2_OF_CTRL">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/EKF2_OF_CTRL" color="#2ca02c"/>
+            </plot>
+          </DockArea>
+          <DockArea name="EKF2_OF_GATE">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/EKF2_OF_GATE" color="#7f7f7f"/>
+            </plot>
+          </DockArea>
+          <DockArea name="EKF2_OF_QMIN">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/EKF2_OF_QMIN" color="#d62728"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+          <DockSplitter orientation="-" count="2" sizes="0.5;0.5">
+          <DockArea name="EKF2_OF_QMIN_GND">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/EKF2_OF_QMIN_GND" color="#ff7f0e"/>
+            </plot>
+          </DockArea>
+          <DockArea name="EKF2_RNG_CTRL">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/EKF2_RNG_CTRL" color="#1f77b4"/>
+            </plot>
+          </DockArea>
+          </DockSplitter>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <Tab containers="1" tab_name="OF params SENS">
+      <Container>
+        <DockSplitter orientation="|" count="3" sizes="0.3333;0.3333;0.3333">
+          <DockArea name="SENS_FLOW_MINHGT">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/SENS_FLOW_MINHGT" color="#111111"/>
+            </plot>
+          </DockArea>
+          <DockArea name="SENS_FLOW_MAXHGT">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/SENS_FLOW_MAXHGT" color="#bcbd22"/>
+            </plot>
+          </DockArea>
+          <DockArea name="SENS_FLOW_MAXR">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0" style="Steps">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="_parameters/SENS_FLOW_MAXR" color="#9467bd"/>
+            </plot>
+          </DockArea>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <currentTabIndex index="0"/>
+  </tabbed_widget>
+  <use_relative_time_offset enabled="1"/>
+  <streaming_buffer_size value="5"/>
+</root>

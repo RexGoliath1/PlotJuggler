@@ -1,0 +1,282 @@
+<?xml version="1.0" ?>
+<root>
+  <Plugins/>
+  <customMathEquations>
+    <snippet name="derived/height_ref_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>return value</function>
+      <linked_source>distance_sensor/current_distance</linked_source>
+    </snippet>
+    <snippet name="derived/thrust_abs" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) then return nan end
+return abs(value)</function>
+      <linked_source>vehicle_thrust_setpoint/xyz.02</linked_source>
+    </snippet>
+    <snippet name="derived/baro_aligned_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end
+is_first = true
+offset = 0</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+if is_first then
+  is_first = false
+  offset = value - v1
+end
+return value - offset</function>
+      <linked_source>vehicle_air_data/baro_alt_meter</linked_source>
+      <additional_sources>
+        <v1>distance_sensor/current_distance</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/baro_comp_k_t_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end
+-- PX4 applies: corrected_alt = raw_alt + K_T * abs(thrust_z)
+-- Edit this value for the compensation gain you want to inspect.
+K_T = -1.0
+is_first = true
+offset = 0</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) then return nan end
+comp = value + K_T * abs(v1)
+if is_first then
+  is_first = false
+  offset = comp - v2
+end
+return comp - offset</function>
+      <linked_source>vehicle_air_data/baro_alt_meter</linked_source>
+      <additional_sources>
+        <v1>vehicle_thrust_setpoint/xyz.02</v1>
+        <v2>distance_sensor/current_distance</v2>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/raw_error_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end
+is_first = true
+offset = 0</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+if is_first then
+  is_first = false
+  offset = value - v1
+end
+return value - offset - v1</function>
+      <linked_source>vehicle_air_data/baro_alt_meter</linked_source>
+      <additional_sources>
+        <v1>distance_sensor/current_distance</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/comp_error_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end
+-- PX4 applies: corrected_alt = raw_alt + K_T * abs(thrust_z)
+-- Edit this value for the compensation gain you want to inspect.
+K_T = -1.0
+is_first = true
+offset = 0</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) then return nan end
+comp = value + K_T * abs(v1)
+if is_first then
+  is_first = false
+  offset = comp - v2
+end
+return comp - offset - v2</function>
+      <linked_source>vehicle_air_data/baro_alt_meter</linked_source>
+      <additional_sources>
+        <v1>vehicle_thrust_setpoint/xyz.02</v1>
+        <v2>distance_sensor/current_distance</v2>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/baro_correction_m" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end
+-- PX4 applies: corrected_alt = raw_alt + K_T * abs(thrust_z)
+-- Edit this value for the compensation gain you want to inspect.
+K_T = -1.0</global>
+      <function>if invalid(value) then return nan end
+return K_T * abs(value)</function>
+      <linked_source>vehicle_thrust_setpoint/xyz.02</linked_source>
+    </snippet>
+    <snippet name="derived/motor_mean" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) or invalid(v3) then return nan end
+return (value + v1 + v2 + v3) / 4.0</function>
+      <linked_source>actuator_motors/control.00</linked_source>
+      <additional_sources>
+        <v1>actuator_motors/control.01</v1>
+        <v2>actuator_motors/control.02</v2>
+        <v3>actuator_motors/control.03</v3>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/motor_max" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) or invalid(v3) then return nan end
+return math.max(value, v1, v2, v3)</function>
+      <linked_source>actuator_motors/control.00</linked_source>
+      <additional_sources>
+        <v1>actuator_motors/control.01</v1>
+        <v2>actuator_motors/control.02</v2>
+        <v3>actuator_motors/control.03</v3>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/vxy_m_s" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) then return nan end
+return math.sqrt(value * value + v1 * v1)</function>
+      <linked_source>vehicle_local_position/vx</linked_source>
+      <additional_sources>
+        <v1>vehicle_local_position/vy</v1>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/accel_up_m_s2" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) or invalid(v3) or invalid(v4) or invalid(v5) or invalid(v6) then return nan end
+ax = value
+ay = v1
+az = v2
+qw = v3
+qx = v4
+qy = v5
+qz = v6
+ned_z = (2 * (qx * qz - qw * qy)) * ax
+      + (2 * (qy * qz + qw * qx)) * ay
+      + (1 - 2 * (qx * qx + qy * qy)) * az
+return -(ned_z + 9.80665)</function>
+      <linked_source>vehicle_acceleration/xyz.00</linked_source>
+      <additional_sources>
+        <v1>vehicle_acceleration/xyz.01</v1>
+        <v2>vehicle_acceleration/xyz.02</v2>
+        <v3>vehicle_attitude/q.00</v3>
+        <v4>vehicle_attitude/q.01</v4>
+        <v5>vehicle_attitude/q.02</v5>
+        <v6>vehicle_attitude/q.03</v6>
+      </additional_sources>
+    </snippet>
+    <snippet name="derived/esc_rpm_mean" language="lua">
+      <global>nan = 0/0
+function invalid(x)
+  return x ~= x
+end
+function abs(x)
+  return math.abs(x)
+end</global>
+      <function>if invalid(value) or invalid(v1) or invalid(v2) or invalid(v3) then return nan end
+return (value + v1 + v2 + v3) / 4.0</function>
+      <linked_source>esc_status/esc.00/esc_rpm</linked_source>
+      <additional_sources>
+        <v1>esc_status/esc.01/esc_rpm</v1>
+        <v2>esc_status/esc.02/esc_rpm</v2>
+        <v3>esc_status/esc.03/esc_rpm</v3>
+      </additional_sources>
+    </snippet>
+  </customMathEquations>
+  <tabbed_widget name="Main Window" parent="main_window">
+    <Tab containers="1" tab_name="Baro comp raw ULog + ESC RPM">
+      <Container>
+        <DockSplitter orientation="-" count="4" sizes="0.25;0.25;0.25;0.25">
+          <DockArea name="height reference / baro">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/height_ref_m" color="#2ca02c"/>
+              <curve name="derived/baro_aligned_m" color="#7f7f7f"/>
+              <curve name="derived/baro_comp_k_t_m" color="#1f77b4"/>
+            </plot>
+          </DockArea>
+          <DockArea name="baro error">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/raw_error_m" color="#d62728"/>
+              <curve name="derived/comp_error_m" color="#2ca02c"/>
+            </plot>
+          </DockArea>
+          <DockArea name="thrust / motor">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/thrust_abs" color="#9467bd"/>
+              <curve name="derived/baro_correction_m" color="#17becf"/>
+              <curve name="derived/motor_mean" color="#ff7f0e"/>
+              <curve name="derived/motor_max" color="#bcbd22"/>
+              <curve name="derived/esc_rpm_mean" color="#e377c2"/>
+            </plot>
+          </DockArea>
+          <DockArea name="accel / velocity">
+            <plot mode="TimeSeries" flip_x="false" flip_y="false" line_width="1.0">
+              <range bottom="-1.000000" top="1.000000" left="0.000000" right="100.000000"/>
+              <limitY/>
+              <curve name="derived/accel_up_m_s2" color="#8c564b"/>
+              <curve name="vehicle_local_position/vz" color="#1f77b4"/>
+              <curve name="derived/vxy_m_s" color="#ff7f0e"/>
+            </plot>
+          </DockArea>
+        </DockSplitter>
+      </Container>
+    </Tab>
+    <currentTabIndex index="0"/>
+  </tabbed_widget>
+  <use_relative_time_offset enabled="1"/>
+  <streaming_buffer_size value="5"/>
+</root>
